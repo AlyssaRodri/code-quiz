@@ -35,10 +35,9 @@ p {
     text-align: center;
 }
 
-h3 {
-    border: 5px solid #abc8c0;
+.block {
     text-align: center;
-    margin-left: 35%;
-    margin-right: 35%;
-    margin-top: 10%;
+    cursor: pointer;
+    width: 100%;
+    padding: 1%;
 }
