@@ -12,11 +12,14 @@
 <!-- https://www.youtube.com/watch?v=riDzcEQbX6k -->
 <!-- Used the above youtube video for help with writing the html -->
 <body>
+    <button class="btn">Timer</button>
     <!-- creating a container to hold the buttons -->
-    <div class="container"></div>
+    <main class="container">
     <!-- naming the generic container that will hold the questions-->
     <div id="question-container" class="hide"></div>
-    <!-- Creating a 'Question' title to see what we are working with -->
+    <!-- creating a main section for styling ease -->
+
+        <!-- Creating a 'Question' title to see what we are working with -->
         <div id="question">Question</div>
         <!-- Creating buttons for the answer that will be held -->
         <div id="answer-buttons" class="btn-answer"></div>
@@ -24,12 +27,15 @@
             <button class="btn">Answer2</button>
             <button class="btn">Answer3</button>
             <button class="btn">Answer4</button>
+    </main>
         <!-- Creating a section that will house our controls  -->
-    <div class="controls"></div>
+    <footer class="controls">
+        <!-- Creating a button that will take you back to the start page -->
+        <button class="btn"onclick=" location.href='./main.html' ">Return to Start Page</button> 
         <!-- Button for skipping questions. Note that I will need to program this to immediatly act as a loss of turn -->
         <button id="skip-btn" class="skipBtn btn">Skip Question</button>
-        <!-- Creating a button that will take you back to the start page -->
-        <button onclick=" location.href='./main.html' ">Return to Start Page</button>
+
+    </footer>
 
 </body>
 <!-- Link to style sheet -->
