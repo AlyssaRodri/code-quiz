@@ -5,7 +5,12 @@ const questionContainerEl = document.getElementById("question-container")
 const timeEl = document.getElementById("timer-btn")
 const questionEl = document.getElementById("question")
 const answerButtonsEl = document.getElementById("answer-buttons")
+const scoreButtonEl = document.getElementById("score-btn")
 var secondsLeft = 180
+// https://michael-karen.medium.com/how-to-save-high-scores-in-local-storage-7860baca9d68
+// creating storage areas for the users score
+localStorage.setItem("numberCorrect", "numberIncorrect")
+
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -24,8 +29,11 @@ function startGame(){
     currentQuestionIndex = 0
     //remove the hide class from the question container so that the questions appear
     questionContainerEl.classList.remove("hide");
+    //remove the hide class from the score button so that the users score will appear
+    scoreButtonEl.classList.remove("hide")
     //When the game is started, so is the timer!
     countDown();
+    //Now we need to ask the questions. This function is also set to load the corresponding answers
     setQuestion();
 }
 
@@ -42,7 +50,7 @@ function countDown(){
      );
 
 }
-    // 1. Timer is started
+
 
 
 //Function for the next set of questions
@@ -64,10 +72,11 @@ function showQuestion (question) {
         const button = document.createElement("button");
         button.innerText = answer.text;
         button.classList.add ("btn")
-        //add if statement
-        if (answer.correct) {
-            button.dataset.correct = answer.correct
-        } // create else element here for incorrect answer and how it impacts our time.
+        //if the statement is correnct
+            if (answer.correct) {
+                //then we set the data set to correct
+                button.dataset.correct = answer.correct
+            } // create else element here for incorrect answer and how it impacts our time.
         button.addEventListener("click", selectAnswer)
         answerButtonsEl.appendChild(button)
         } )
@@ -105,9 +114,19 @@ function selectAnswer(e){
 }
 
 function setStatusClass(element, correct) {
+    //Define a variable of objects for JSON
+    var highScore = {
+        correct: correct.value,
+        wrong: wrong.value
+    }
     clearStatusClass (element)
-    if (correct){
-        element.classList.add("correct")
+    //if the data is correct, then set the status class to 'correct'
+    if (correct){ 
+        element.classList.add("correct");
+
+        localStorage.setItem("highScore", JSON.stringify(highScore))
+        console.log(highScore.correct)
+
     } else{ 
         element.classList.add("wrong")
     }

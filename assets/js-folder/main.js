@@ -1,1 +1,0 @@
-<button onclick="document.getElement(.block)">The time is?</button>
