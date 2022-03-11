@@ -1,4 +1,4 @@
-*, *::before, *::after{
+* {
     background-color: #50514F ;
     box-sizing: border-box;
     font-size: 16px;

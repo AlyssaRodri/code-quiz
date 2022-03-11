@@ -5,6 +5,7 @@ const questionContainerEl = document.getElementById("question-container")
 const timeEl = document.getElementById("timer-btn")
 const questionEl = document.getElementById("question")
 const answerButtonsEl = document.getElementById("answer-buttons")
+var secondsLeft = 180
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -30,7 +31,16 @@ function startGame(){
 
 //Create a Timer function so that it can be called inside other functions
 function countDown(){
-    console.log(2)
+    var timerInterval = setInterval( function() {
+        secondsLeft--;
+        timeEl.innerHTML = secondsLeft
+        if(secondsLeft === 0) {
+            clearInterval(timerInterval)
+            questionContainerEl.classList.add("hide")
+        }
+    }, 1000 //1000 milliseconds are in 1 second
+     );
+
 }
     // 1. Timer is started
 
