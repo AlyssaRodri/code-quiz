@@ -29,12 +29,29 @@ div {
     color: #50514F;
 }
 
+.btn-answer{
+    display: grid;
+}
+
 .btn {
     background-color: #abc8c0;
     color: #50514F;
+    margin: 3px;
 }
 
 .btn:hover{
     border-color: #3772FF ;
     cursor: pointer;
+}
+
+.timerBtn, .returnBtn, .startBtn, .skipBtn{
+    font-size: 1.5rem;
+}
+
+#start-btn{
+    font-size: 1.5rem;
+}
+
+.hide {
+    display: none;
 }

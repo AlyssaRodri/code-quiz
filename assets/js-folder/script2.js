@@ -1,47 +1,24 @@
-// // Declared time as an element
-// var timeEl = document.querySelector(".time");
-// var secondsLeft = 300
-// var displayQuestion = document.querySelector(".questionHere")
-// var viewport = document.querySelector(".viewport")
-// var msgDiv = document.querySelector("#msg");
-
-
-// var questionList = ["What comes first in an HTML Document?", ]
-// var answers1 = [ "A - head tag", "B - header tag", "C -h1 tag", "D -nav tag"]
 
 
 
 
-// function init() {
-//     for( var i = 0; i >= questionList.length; i++)
-//         document.displayQuestion.textContent = questionList[i]
-        
-//         var btn1 = document.createElement("button")
-//         btn1.setAttribute("id", "click1");
-//         btn1.textContent = "click 1"
-//         viewport.appendChild(btn1)
+//When start game is hit!
+function startGame(){
+    console.log(1)
+}
+    // 1. Timer is started
+    // 2. The questions are no longer hidden
 
-//     //     viewport.addEventListener("click", function (event) {
-//     //     if (event.target.tagName.toLowerCase() === "button") {
-//     //         console.log("yes it was a button")
-//     // }
-  
-//     }
+//Function for the next set of questions
+function setQuestion(){
+    console.log(2)    
+    // requires the variables for the questions
+}
 
-
-
-
-// function setTime() {
-//     var timeInterval = setInterval(function () {
-//         secondsLeft--;
-
-//         if (secondsLeft === 0) {
-//             clearInterval(timeInterval)
-
-//             //need second if statement for how much time per question.
-//         }
-//     }, 45000 //This means that there are 45 seconds per question
-//     )
-// }
-
-// init()
+//Function for selecting the answers
+function selectAnswer(){
+    console.log(3)
+    //requires the variables for the answers.
+    //Will need to tie into the timer as when the answer is wrong the timer reduces
+    //Will also need to store the users input into the local data
+}
