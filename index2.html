@@ -19,16 +19,18 @@
         <div id="question-container" class="hide">
         <!-- Creating a 'Question' title to see what we are working with -->
             <div id="question">Question</div>
-            <!-- Creating buttons for the answer that will be held -->
+            <!-- Creating buttons to hold the answer choices -->
             <div id="answer-buttons" class="btn-answer">
-                <button class="btn">Answer1</button>
-                <button class="btn">Answer2</button>
-                <button class="btn">Answer3</button>
-                <button class="btn">Answer4</button>
+                <button class="btn ansBtn">Answer1</button>
+                <button class="btn ansBtn" >Answer2</button>
+                <button class="btn ansBtn">Answer3</button>
+                <button class="btn ansBtn">Answer4</button>
             </div>
         </div>
         <button id="start-btn" class="startbtn btn">Start</button>
-        <button id="score-btn" class="scorebtn btn hide">High Score</button>
+        <div id="score-div" class="scorediv hide">High Score</div>
+        <h2><span id="correct">0</span> Correct</h2>
+        <h2><span id="wrong">0</span> Wrong</h2>
         
     </main>
 

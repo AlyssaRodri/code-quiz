@@ -5,12 +5,9 @@ const questionContainerEl = document.getElementById("question-container")
 const timeEl = document.getElementById("timer-btn")
 const questionEl = document.getElementById("question")
 const answerButtonsEl = document.getElementById("answer-buttons")
-const scoreButtonEl = document.getElementById("score-btn")
+const scoreEl = document.getElementById("score-div")
 var secondsLeft = 180
-// https://michael-karen.medium.com/how-to-save-high-scores-in-local-storage-7860baca9d68
-// creating storage areas for the users score
-localStorage.setItem("numberCorrect", "numberIncorrect")
-
+var correct = document.getElementById
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -21,7 +18,6 @@ nextButton.addEventListener("click", () => {
 })
 //When start game is hit!
 function startGame(){
-    // console.log(1)
     //hide the start button
     startButton.classList.add("hide");
     //set shuffled questions equal to shuffled array
@@ -29,11 +25,8 @@ function startGame(){
     currentQuestionIndex = 0
     //remove the hide class from the question container so that the questions appear
     questionContainerEl.classList.remove("hide");
-    //remove the hide class from the score button so that the users score will appear
-    scoreButtonEl.classList.remove("hide")
     //When the game is started, so is the timer!
-    countDown();
-    //Now we need to ask the questions. This function is also set to load the corresponding answers
+    countDown()
     setQuestion();
 }
 
@@ -42,9 +35,14 @@ function countDown(){
     var timerInterval = setInterval( function() {
         secondsLeft--;
         timeEl.innerHTML = secondsLeft
+        // when the seconds left variable is finished
         if(secondsLeft === 0) {
+            //stop the timer
             clearInterval(timerInterval)
+            // and hide the questions
             questionContainerEl.classList.add("hide")
+            // display the score list
+            scoreEl.classList.remove("hide")
         }
     }, 1000 //1000 milliseconds are in 1 second
      );
@@ -52,10 +50,8 @@ function countDown(){
 }
 
 
-
 //Function for the next set of questions
 function setQuestion(){
-    // console.log(3)
     //add another function that will reset the box so that it looks like the same it did in the beginning instead of appending on.
     resetState()
     // shuffles the questions so that they are in a new order every time
@@ -72,11 +68,10 @@ function showQuestion (question) {
         const button = document.createElement("button");
         button.innerText = answer.text;
         button.classList.add ("btn")
-        //if the statement is correnct
-            if (answer.correct) {
-                //then we set the data set to correct
-                button.dataset.correct = answer.correct
-            } // create else element here for incorrect answer and how it impacts our time.
+        //add if statement
+        if (answer.correct) {
+            button.dataset.correct = answer.correct
+        } // create else element here for incorrect answer and how it impacts our time.
         button.addEventListener("click", selectAnswer)
         answerButtonsEl.appendChild(button)
         } )
@@ -93,7 +88,7 @@ function resetState() {
 
 //Function for selecting the answers
 function selectAnswer(e){
-    // console.log(4)
+    console.log(e)
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
     setStatusClass(document.body, correct)
@@ -114,19 +109,11 @@ function selectAnswer(e){
 }
 
 function setStatusClass(element, correct) {
-    //Define a variable of objects for JSON
-    var highScore = {
-        correct: correct.value,
-        wrong: wrong.value
-    }
+    // if the element the users selects is correct
+    localStorage.setItem("correctCount", )
     clearStatusClass (element)
-    //if the data is correct, then set the status class to 'correct'
-    if (correct){ 
-        element.classList.add("correct");
-
-        localStorage.setItem("highScore", JSON.stringify(highScore))
-        console.log(highScore.correct)
-
+    if (correct){
+        element.classList.add("correct")
     } else{ 
         element.classList.add("wrong")
     }
