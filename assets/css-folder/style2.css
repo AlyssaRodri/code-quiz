@@ -55,3 +55,8 @@ div {
 .hide {
     display: none;
 }
+
+.text {
+    background-color: #abc8c0;
+    color: #50514F;
+}
