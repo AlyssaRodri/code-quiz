@@ -12,21 +12,10 @@ var wrongCounter = document.querySelector("wrongCounter")
 var ansCorrect = []
 var ansWrong = []
 //https://michael-karen.medium.com/how-to-save-high-scores-in-local-storage-7860baca9d68
-const noHighScores = 3;
-const High_Scores = "highScores";
+const NO_OF_HIGH_SCORES = 10;
+const HIGH_SCORES = 'highScores';
 const highScoreString = localStorage.getItem(HIGH_SCORES);
 const highScores = JSON.parse(highScoreString) ?? [];
-
-
-
-
-
-
-
-
-
-
-
 
 
 let shuffledQuestions, currentQuestionIndex
@@ -50,6 +39,9 @@ function startGame(){
     //When the game is started, so is the timer!
     countDown()
     setQuestion();
+    if (shuffledQuestions.length > currentQuestionIndex ){
+        gameOver()
+    }
 
 }
 
@@ -124,8 +116,8 @@ function selectAnswer(e){
     if (shuffledQuestions.length > currentQuestionIndex + 1){
         nextButton.classList.remove("hide")
     } else {
-        startButton.innerText = "Restart";
-        startButton.classList.remove("hide");
+        startButton.innerText = "Restart"
+        startButton.classList.remove("hide")
     }
 }
 
@@ -156,6 +148,27 @@ function statusClassWrong(){
     //and store that in our local storage under answers wrong
     localStorage.setItem("wrongCounter", ansWrong)
 }
+
+
+function gameOver(){
+    
+}
+
+
+
+
+function checkHighScore(score) {
+    const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
+    const lowestScore = highScores[NO_OF_HIGH_SCORES - 1]?.score ?? 0;
+    
+    if (score > lowestScore) {
+      saveHighScore(score, highScores); // TODO
+      showHighScores(); // TODO
+    }
+  }
+
+
+
 
 
 //Create the variable for all of our questions and answers.
