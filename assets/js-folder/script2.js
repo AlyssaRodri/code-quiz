@@ -11,8 +11,11 @@ var correctCounter = document.querySelector("correctCounter");
 var wrongCounter = document.querySelector("wrongCounter")
 var ansCorrect = []
 var ansWrong = []
-
-
+//https://michael-karen.medium.com/how-to-save-high-scores-in-local-storage-7860baca9d68
+const noHighScores = 3;
+const High_Scores = "highScores";
+const highScoreString = localStorage.getItem(HIGH_SCORES);
+const highScores = JSON.parse(highScoreString) ?? [];
 
 
 
@@ -121,8 +124,8 @@ function selectAnswer(e){
     if (shuffledQuestions.length > currentQuestionIndex + 1){
         nextButton.classList.remove("hide")
     } else {
-        startButton.innerText = "Restart"
-        startButton.classList.remove("hide")
+        startButton.innerText = "Restart";
+        startButton.classList.remove("hide");
     }
 }
 
