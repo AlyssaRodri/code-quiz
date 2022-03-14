@@ -1,13 +1,30 @@
 //Setting the global variables
-const startButton = document.getElementById("start-btn")
-const nextButton = document.getElementById("skip-btn")
-const questionContainerEl = document.getElementById("question-container")
-const timeEl = document.getElementById("timer-btn")
-const questionEl = document.getElementById("question")
-const answerButtonsEl = document.getElementById("answer-buttons")
-const scoreEl = document.getElementById("score-div")
+const startButton = document.getElementById("start-btn");
+const nextButton = document.getElementById("next-btn");
+const questionContainerEl = document.getElementById("question-container");
+const timeEl = document.getElementById("timer-btn");
+const questionEl = document.getElementById("question");
+const answerButtonsEl = document.getElementById("answer-buttons");
+const scoreEl = document.getElementById("score-div");
 var secondsLeft = 180
-var correct = document.getElementById
+var correctCounter = document.querySelector("correctCounter");
+var wrongCounter = document.querySelector("wrongCounter")
+var ansCorrect = []
+var ansWrong = []
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 let shuffledQuestions, currentQuestionIndex
 
@@ -16,6 +33,8 @@ nextButton.addEventListener("click", () => {
     currentQuestionIndex++
     setQuestion()
 })
+
+
 //When start game is hit!
 function startGame(){
     //hide the start button
@@ -28,6 +47,7 @@ function startGame(){
     //When the game is started, so is the timer!
     countDown()
     setQuestion();
+
 }
 
 //Create a Timer function so that it can be called inside other functions
@@ -74,21 +94,22 @@ function showQuestion (question) {
         } // create else element here for incorrect answer and how it impacts our time.
         button.addEventListener("click", selectAnswer)
         answerButtonsEl.appendChild(button)
+
+
         } )
 }
 
 function resetState() {
-    nextButton.classList.add("hide");
     // if there is a first child on the answerButtonsEl
     while (answerButtonsEl.firstChild) {
         //then we remove that child
         answerButtonsEl.removeChild(answerButtonsEl.firstChild)
     }
+    
 }
 
 //Function for selecting the answers
 function selectAnswer(e){
-    console.log(e)
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
     setStatusClass(document.body, correct)
@@ -103,26 +124,36 @@ function selectAnswer(e){
         startButton.innerText = "Restart"
         startButton.classList.remove("hide")
     }
-    //requires the variables for the answers.
-    //Will need to tie into the timer as when the answer is wrong the timer reduces
-    //Will also need to store the users input into the local data
 }
 
 function setStatusClass(element, correct) {
-    // if the element the users selects is correct
-    localStorage.setItem("correctCount", )
-    clearStatusClass (element)
-    if (correct){
-        element.classList.add("correct")
-    } else{ 
-        element.classList.add("wrong")
+    if (correct){    // if the element the users selects is correct
+
+        statusClassCorrect(element)
+        console.log(element)
+
+    } else{ // if it is not correct aka "wrong"
+        statusClassWrong(element)
+
     }
 }
 
-function clearStatusClass(element) {
-    element.classList.remove("correct")
-    element.classList.remove("wrong")
+function statusClassCorrect(){
+    //then add 1 to our answer correct variable
+    ansCorrect++;
+        //and store that in local storage under answers correct
+    localStorage.setItem("correctCounter", ansCorrect)
+    //then we display the number of items that we are correct
+    correctCounter = localStorage.getItem("correctCounter")
 }
+
+function statusClassWrong(){
+    //then add 1 to our answer incorrect variable
+    ansWrong++;
+    //and store that in our local storage under answers wrong
+    localStorage.setItem("wrongCounter", ansWrong)
+}
+
 
 //Create the variable for all of our questions and answers.
 //https://www.youtube.com/watch?v=riDzcEQbX6k
