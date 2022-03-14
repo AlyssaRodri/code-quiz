@@ -5,14 +5,14 @@ const questionContainerEl = document.getElementById("question-container");
 const timeEl = document.getElementById("timer-btn");
 const questionEl = document.getElementById("question");
 const answerButtonsEl = document.getElementById("answer-buttons");
-const scoreEl = document.getElementById("score-div");
-var secondsLeft = 180
-var correctCounter = document.querySelector("correctCounter");
-var wrongCounter = document.querySelector("wrongCounter")
+const scoreButton = document.getElementById("score-button")
+var secondsLeft = 50
+const correctCounter = document.querySelector("correctCounter");
+const wrongCounter = document.querySelector("wrongCounter")
 var ansCorrect = []
 var ansWrong = []
 //https://michael-karen.medium.com/how-to-save-high-scores-in-local-storage-7860baca9d68
-const NO_OF_HIGH_SCORES = 10;
+const NO_OF_HIGH_SCORES = 3;
 const HIGH_SCORES = 'highScores';
 const highScoreString = localStorage.getItem(HIGH_SCORES);
 const highScores = JSON.parse(highScoreString) ?? [];
@@ -27,6 +27,7 @@ nextButton.addEventListener("click", () => {
 })
 
 
+
 //When start game is hit!
 function startGame(){
     //hide the start button
@@ -39,9 +40,7 @@ function startGame(){
     //When the game is started, so is the timer!
     countDown()
     setQuestion();
-    if (shuffledQuestions.length > currentQuestionIndex ){
-        gameOver()
-    }
+    scoreButton.addEventListener("click", gameOver)
 
 }
 
@@ -76,6 +75,7 @@ function setQuestion(){
 
 function showQuestion (question) {
     //loops through our questions questions
+    
     questionEl.innerText = question.question
     //this loops through our answers
     question.answers.forEach( answer =>{
@@ -86,7 +86,8 @@ function showQuestion (question) {
         //add if statement
         if (answer.correct) {
             button.dataset.correct = answer.correct
-        } // create else element here for incorrect answer and how it impacts our time.
+        } 
+        
         button.addEventListener("click", selectAnswer)
         answerButtonsEl.appendChild(button)
 
@@ -116,8 +117,8 @@ function selectAnswer(e){
     if (shuffledQuestions.length > currentQuestionIndex + 1){
         nextButton.classList.remove("hide")
     } else {
-        startButton.innerText = "Restart"
-        startButton.classList.remove("hide")
+        alert("You have answered all the questions. Click the Score button to see your score!")
+        return
     }
 }
 
@@ -139,7 +140,7 @@ function statusClassCorrect(){
         //and store that in local storage under answers correct
     localStorage.setItem("correctCounter", ansCorrect)
     //then we display the number of items that we are correct
-    correctCounter = localStorage.getItem("correctCounter")
+
 }
 
 function statusClassWrong(){
@@ -147,13 +148,17 @@ function statusClassWrong(){
     ansWrong++;
     //and store that in our local storage under answers wrong
     localStorage.setItem("wrongCounter", ansWrong)
+    //then we display the number of items that were wrong.
 }
 
 
 function gameOver(){
-    
-}
+    correctCounter.textContent = "You got " + ansCorrect + "right!"
+    correctCounter.textContent = "You got" + ansWrong + "wrong."
+    var score = JSON.parse(localStorage.getItem(ansCorrect))
+    checkHighScore(score)
 
+}
 
 
 
@@ -165,10 +170,24 @@ function checkHighScore(score) {
       saveHighScore(score, highScores); // TODO
       showHighScores(); // TODO
     }
-  }
+}
 
-
-
+function saveHighScore(score, highScores) {
+    const name = prompt('You got a highscore! Enter name:');
+    const newScore = { score, name };
+    
+    // 1. Add to list
+    highScores.push(newScore);
+  
+    // 2. Sort the list
+    highScores.sort((a, b) => b.score - a.score);
+    
+    // 3. Select new list
+    highScores.splice(NO_OF_HIGH_SCORES);
+    
+    // 4. Save to local storage
+    localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
+  };
 
 
 //Create the variable for all of our questions and answers.

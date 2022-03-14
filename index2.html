@@ -28,18 +28,16 @@
             </div>
         </div>
         <button id="start-btn" class="startbtn btn">Start</button>
+        <button id="end-btn" class="endbtn btn hide">Start</button>
 
         
     </main>
-        <div class="container">
-            <span class="correctCounter" > Correct </span> 
-            <span class="wrongCounter" > Wrong </span> 
-        </div>
+  
 
 
         <!-- Creating a section that will house our controls  -->
-    <footer class="controls">
-        <button id="score-btn" class=" btn score-btn hide "> See Score </button>
+    <section class="controls">
+
         <!-- Creating a button that will take you back to the start page -->
         <button id="return-btn"class="returnBtn btn"onclick=" location.href='./main.html' ">Return to Start Page</button> 
         <!-- Button for going to the next questions. -->
@@ -47,8 +45,16 @@
         <!-- PLEASE NOTE, I changed this button to Next question instead of skip for ease of use.  -->
 
 
-    </footer>
+    </section>
 
+    <section id="score-container" class="container">
+
+        <button id="score-btn" class=" btn score-btn"> See Score </button> 
+        <span class="correctCounter" > Correct </span> 
+        <span class="wrongCounter" > Wrong </span>   
+        <h2>HIGH SCORES</h2>
+            <ol id=”highScores”></ol>      
+    </section>
 </body>
 <!-- Link to style sheet -->
 <script src="./assets/js-folder/script2.js"></script>
